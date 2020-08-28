@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "181687210434",
+    "firebase_url": "https://nimus-commercia.firebaseio.com",
+    "project_id": "nimus-commercia",
+    "storage_bucket": "nimus-commercia.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:181687210434:android:665b26f11dc0b70609065b",
+        "android_client_info": {
+          "package_name": "com.nimus.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "181687210434-pf2gk50p76df5oc8a6h890jjc15g0hme.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nimus.android",
+            "certificate_hash": "7664873bb1bf5fa64a2fdc0609bc53483c46207a"
+          }
+        },
+        {
+          "client_id": "181687210434-d9lgj41tujisben0imp71h13u2k899r4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBB5mIYffUkmiFAPDtrmbv30887OJI0auc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "181687210434-d9lgj41tujisben0imp71h13u2k899r4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

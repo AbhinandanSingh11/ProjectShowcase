@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#039BE5</color>
+    <color name="colorPrimaryDark">#0288D1</color>
+    <color name="colorAccent">#FFA000</color>
+
+    <color name="grey_100">#F5F5F5</color>
+    <color name="grey_300">#E0E0E0</color>
+    <color name="grey_500">#9E9E9E</color>
+    <color name="bright_green">#32CD32</color>
+    <color name="my_pink">#fe104d</color>
+    <color name="pink">#fe104d</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#ffffff</color>
+    <color name="link">#0000ee</color>
+    <color name="golden">#ffee58</color>
+    <color name="grey">#bababa</color>
+    <color name="spaceman">#212020</color>
+    <color name="background">#65828e</color>
+    <color name="main_color">#ff9a00</color>
+    <color name="secondary_color">#bdbdbd</color>
+    <color name="red">#ff0000</color>
+    <color name="yellow_A200">#ffff00</color>
+    <color name="album_title">#4c4c4c</color>
+    <color name="bgBottomNavigation">#fe485a</color>
+    <color name ="Accent">#FF4081</color>\
+    <color name="ThemeLightPurple">#720D5D</color>
+    <color name="ThemeCraneRed">#E30425</color>
+    <color name="ThemeCranePurpleStatus">#4E0D3A</color>
+    <color name="ThemeCranePurplePrimary">#5D1049</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="lightgray">#ededed</color>
+    <color name="green">#00bfa5</color>
+    <color name="deeppurple">#7c4dff</color>
+    <color name="yellow">#ffb300</color>
+    <color name="color1">#ffb300</color>
+    <color name="color2">#7c4dff</color>
+    <color name="color3">#ff9a00</color>
+    <color name="color4">#ffee58</color>
+    <color name="color5">#fe485a</color>
+    <color name="ripple_color">#0099CC</color>
+    <color name="darkblack">#000000</color>
+    <color name="defaultActivityColor">#f2f2f2</color>
+    <color name="lightpink">#FFB6C1</color>
+    <color name="whiteTint">#f2f2f2</color>
+    <color name="colorBackground">#1FE71844</color>
+    <color name="colorCardBackground">#031219</color>
+    <color name="colorPrimaryQR">#E71844 </color>
+    <color name="card_bg_color">#fbfbfb</color>
+    <color name="card_bg_dark_color">#0e0e0e</color>
+    <color name="title_text_color">#258bd6</color>
+    <color name="content_text_color">#999da4</color>
+    <color name="yello">#ffc107</color>
+    <color name="gray_line_color">#e7e7e7</color>
+</resources>
