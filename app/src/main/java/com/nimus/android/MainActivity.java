@@ -229,6 +229,8 @@ public class MainActivity extends AppCompatActivity {
                     message = "Connection TimeOut! Please check your internet connection.";
                 }
 
+                if(message!=null)
+                    Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
                 refreshLayout.setRefreshing(false);
                 hide();
 
