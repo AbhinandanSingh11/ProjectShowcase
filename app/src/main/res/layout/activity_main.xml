@@ -56,122 +56,49 @@
 
 
 
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Featured Articles"
-        android:textColor="#ffffff"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/TopAppBar"
-        android:layout_marginStart="0dp"
-        android:textStyle="bold"
-        android:id="@+id/headingFA"
-        android:layout_marginTop="15dp"/>
-
-    <!--  <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="View All"
-          android:textColor="@color/my_pink"
-          app:layout_constraintEnd_toEndOf="parent"
-          android:id="@+id/viewAllArt"
-          app:layout_constraintTop_toBottomOf="@id/TopAppBar"
-          android:layout_marginTop="15dp"/>
-  -->
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="15dp"
-        app:cardBackgroundColor="@color/black"
-        android:background="@color/black"
-        android:backgroundTint="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/headingFA"
-        android:id="@+id/CradView"
-        app:cardCornerRadius="5dp">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:background="@color/black"
-            android:backgroundTint="@color/black">
-
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/slider_pager"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-            <ProgressBar
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Recent Releases"
+                android:textColor="#ffffff"
+                android:id="@+id/headingRR"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/TopAppBar"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="15dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View All"
+                android:textColor="@color/my_pink"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:id="@+id/progressSlides"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
+                app:layout_constraintTop_toBottomOf="@id/TopAppBar"
+                android:id="@+id/TextViewViewAllRecentlyReleased"
+                android:layout_marginTop="15dp"
+                android:clickable="true"/>
 
 
-    <com.google.android.material.tabs.TabLayout
-        app:tabGravity="center"
-        android:id="@+id/indicator"
-        app:tabBackground="@drawable/indicator_selector"
-        app:tabIndicatorHeight="0dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/CradView">
 
-    </com.google.android.material.tabs.TabLayout>
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:id="@+id/refreshMovies"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/TextViewViewAllRecentlyReleased"
+            android:layout_marginTop="15dp">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewMain"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Recent Releases"
-        android:textColor="#ffffff"
-        android:id="@+id/headingRR"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/indicator"
-        android:layout_marginStart="0dp"
-        android:textStyle="bold"/>
+            </androidx.recyclerview.widget.RecyclerView>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="View All"
-        android:textColor="@color/my_pink"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/indicator"
-        android:id="@+id/TextViewViewAllRecentlyReleased"
-        android:clickable="true"/>
-
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:id="@+id/refreshMovies"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="15dp"
-        app:layout_constraintTop_toBottomOf="@id/headingRR">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewMain"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </androidx.recyclerview.widget.RecyclerView>
-
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
@@ -180,7 +107,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:src="@drawable/ic_add_white"
         android:id="@+id/fab_create"/>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

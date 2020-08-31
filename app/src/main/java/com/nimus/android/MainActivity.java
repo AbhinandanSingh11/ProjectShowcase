@@ -60,12 +60,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ViewPager sliderpager;
-    private TabLayout indicator;
+    //private ViewPager sliderpager;
+    //private TabLayout indicator;
     private RecyclerView recyclerView;
     private RecyclerViewAdapter adapter;
     private SliderPagerAdapter slideadapter;
-    private ProgressBar progressSlide;
+    //private ProgressBar progressSlide;
     private CircleImageView circleImageView;
     private ArrayList<ProjectModel> list = new ArrayList<>();
     private final String SlideURL = "https://www.nimus.co.in/nimus/slides.json";
@@ -84,12 +84,12 @@ public class MainActivity extends AppCompatActivity {
 
         getWindow().setStatusBarColor(getColor(R.color.black));
 
-        sliderpager = findViewById(R.id.slider_pager) ;
-        indicator = findViewById(R.id.indicator);
+        //sliderpager = findViewById(R.id.slider_pager) ;
+        //indicator = findViewById(R.id.indicator);
         recyclerView = findViewById(R.id.recyclerViewMain);
         refreshLayout = findViewById(R.id.refreshMovies);
         viewAll = findViewById(R.id.TextViewViewAllRecentlyReleased);
-        progressSlide = findViewById(R.id.progressSlides);
+        //progressSlide = findViewById(R.id.progressSlides);
         circleImageView = findViewById(R.id.ImageViewlogo);
         name = findViewById(R.id.nameMainActivity);
         fab = findViewById(R.id.fab_create);
@@ -158,11 +158,11 @@ public class MainActivity extends AppCompatActivity {
         new Sync().execute(URL);
 
 
-        loadSlides();
+        //loadSlides();
         loadRecyclerView();
     }
 
-    void loadSlides(){
+/*    void loadSlides(){
         slideadapter = new SliderPagerAdapter(this);
         sliderpager.setAdapter(slideadapter);
 
@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
         },4000,6000);
 
         indicator.setupWithViewPager(sliderpager,true);
-    }
+    }*/
 
     void loadRecyclerView(){
         adapter = new RecyclerViewAdapter(list,MainActivity.this);
@@ -248,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
         queue.add(request);
     }
 
-    public void fetchSlide(String url){
+   /* public void fetchSlide(String url){
         requestSlide = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -294,7 +294,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         queue.add(requestSlide);
-    }
+    }*/
 
 
 
@@ -358,7 +358,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         SlideAppData.getInstance().getArrayList().clear();
-        fetchSlide(SlideURL);
+        //fetchSlide(SlideURL);
     }
 
     @Override
@@ -370,17 +370,17 @@ public class MainActivity extends AppCompatActivity {
     void hide(){
         viewAll.setVisibility(View.GONE);
         recyclerView.setVisibility(View.GONE);
-        sliderpager.setVisibility(View.GONE);
-        indicator.setVisibility(View.GONE);
+        //sliderpager.setVisibility(View.GONE);
+        //indicator.setVisibility(View.GONE);
         refreshLayout.setVisibility(View.GONE);
-        progressSlide.setVisibility(View.GONE);
+        //progressSlide.setVisibility(View.GONE);
     }
 
     void show(){
         viewAll.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.VISIBLE);
-        sliderpager.setVisibility(View.VISIBLE);
-        indicator.setVisibility(View.VISIBLE);
+        //sliderpager.setVisibility(View.VISIBLE);
+        //indicator.setVisibility(View.VISIBLE);
         refreshLayout.setVisibility(View.VISIBLE);
     }
 }
