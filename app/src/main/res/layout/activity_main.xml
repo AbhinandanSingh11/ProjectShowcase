@@ -173,5 +173,14 @@
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@drawable/ic_add_white"
+        android:id="@+id/fab_create"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

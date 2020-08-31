@@ -9,10 +9,11 @@
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RecentyReleasedActivity"></activity>
+        <activity android:name=".UploadActivity"></activity>
+        <activity android:name=".RecentyReleasedActivity" />
         <activity android:name=".projectDesc" />
         <activity android:name=".ActivityProfile" />
-        <activity android:name=".LoginActivity" >
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,6 +22,7 @@
         </activity>
         <activity android:name=".Browser" />
         <activity android:name=".MainActivity" />
+
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713" />

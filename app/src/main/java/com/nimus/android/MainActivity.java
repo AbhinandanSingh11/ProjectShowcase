@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
     private AppCompatTextView name;
     private SwipeRefreshLayout refreshLayout;
     private TextView viewAll;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
         progressSlide = findViewById(R.id.progressSlides);
         circleImageView = findViewById(R.id.ImageViewlogo);
         name = findViewById(R.id.nameMainActivity);
+        fab = findViewById(R.id.fab_create);
 
         name.setText("Hello "+ UserAppData.getInstance().getCurrentUser().getDisplayName());
 
@@ -115,6 +117,13 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this,RecentyReleasedActivity.class);
                 startActivity(intent);
 
+            }
+        });
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,UploadActivity.class));
             }
         });
 
