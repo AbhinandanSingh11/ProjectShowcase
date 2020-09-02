@@ -80,10 +80,6 @@ public class LoginActivity extends AppCompatActivity {
         if(currentUser != null){
             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
             startActivity(intent);
-
-        }
-        else{
-            Toast.makeText(LoginActivity.this, "User null", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -136,8 +132,6 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
-                            Toast.makeText(LoginActivity.this, "failed", Toast.LENGTH_SHORT).show();
                         }
 
                         // [START_EXCLUDE]

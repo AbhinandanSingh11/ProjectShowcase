@@ -41,9 +41,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         holder.title.setText(list.get(position).getTitle());
-        holder.price.setText(list.get(position).getPrice());
+        holder.price.setText(list.get(position).getCost());
         Glide.with(context)
-                .load(list.get(position).getDisplayImageURL())
+                .load(list.get(position).getImageURL())
                 .placeholder(R.color.black)
                 .centerCrop()
                 .into(holder.image);

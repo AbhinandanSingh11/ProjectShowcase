@@ -1,65 +1,59 @@
 package com.nimus.android.Models;
 
 public class ProjectModel {
-    private String title;
-    private String price;
-    private String displayImageURL;
-    private String publishDate;
+    private String category;
+    private String cost;
+    private String date;
     private String desc;
-    private String size;
-    private String author;
-    private String coAuthor;
-    private String projectURL;
-    private String instagramPostUrl;
+    private String email;
+    private String image;
+    private String imageURL;
+    private String title;
+    private String uid;
+    private String url;
+    private String user;
 
 
     public ProjectModel(){
 
     }
 
-    public ProjectModel(String title, String price, String displayImageURL, String publishDate, String desc, String size, String author, String coAuthor, String projectURL, String instagramPostUrl) {
-        this.title = title;
-        this.price = price;
-        this.displayImageURL = displayImageURL;
-        this.publishDate = publishDate;
+    public ProjectModel(String category, String cost, String date, String desc, String email, String image, String imageURL, String title, String uid, String url, String user) {
+        this.category = category;
+        this.cost = cost;
+        this.date = date;
         this.desc = desc;
-        this.size = size;
-        this.author = author;
-        this.coAuthor = coAuthor;
-        this.projectURL = projectURL;
-        this.instagramPostUrl = instagramPostUrl;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
+        this.email = email;
+        this.image = image;
+        this.imageURL = imageURL;
         this.title = title;
+        this.uid = uid;
+        this.url = url;
+        this.user = user;
     }
 
-    public String getPrice() {
-        return price;
+    public String getCategory() {
+        return category;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    public String getDisplayImageURL() {
-        return displayImageURL;
+    public String getCost() {
+        return cost;
     }
 
-    public void setDisplayImageURL(String displayImageURL) {
-        this.displayImageURL = displayImageURL;
+    public void setCost(String cost) {
+        this.cost = cost;
     }
 
-    public String getPublishDate() {
-        return publishDate;
+    public String getDate() {
+        return date;
     }
 
-    public void setPublishDate(String publishDate) {
-        this.publishDate = publishDate;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getDesc() {
@@ -70,43 +64,59 @@ public class ProjectModel {
         this.desc = desc;
     }
 
-    public String getSize() {
-        return size;
+    public String getEmail() {
+        return email;
     }
 
-    public void setSize(String size) {
-        this.size = size;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getImage() {
+        return image;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public String getCoAuthor() {
-        return coAuthor;
+    public String getImageURL() {
+        return imageURL;
     }
 
-    public void setCoAuthor(String coAuthor) {
-        this.coAuthor = coAuthor;
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
-    public String getProjectURL() {
-        return projectURL;
+    public String getTitle() {
+        return title;
     }
 
-    public void setProjectURL(String projectURL) {
-        this.projectURL = projectURL;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getInstagramPostUrl() {
-        return instagramPostUrl;
+    public String getUid() {
+        return uid;
     }
 
-    public void setInstagramPostUrl(String instagramPostUrl) {
-        this.instagramPostUrl = instagramPostUrl;
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 }

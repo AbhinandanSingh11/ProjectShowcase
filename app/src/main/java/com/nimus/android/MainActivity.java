@@ -1,5 +1,6 @@
 package com.nimus.android;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -16,6 +17,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
@@ -40,6 +42,11 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.nimus.android.Adapters.RecyclerViewAdapter;
 import com.nimus.android.Adapters.SliderPagerAdapter;
 import com.nimus.android.AppData.SlideAppData;
@@ -60,18 +67,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
 
-    //private ViewPager sliderpager;
-    //private TabLayout indicator;
+
     private RecyclerView recyclerView;
     private RecyclerViewAdapter adapter;
-    private SliderPagerAdapter slideadapter;
-    //private ProgressBar progressSlide;
     private CircleImageView circleImageView;
     private ArrayList<ProjectModel> list = new ArrayList<>();
-    private final String SlideURL = "https://www.nimus.co.in/nimus/slides.json";
-    private final String URL = "https://www.nimus.co.in/nimus/post.json";
-    private JsonArrayRequest request, requestSlide;
-    private RequestQueue queue;
     private AppCompatTextView name;
     private SwipeRefreshLayout refreshLayout;
     private TextView viewAll;
@@ -84,23 +84,21 @@ public class MainActivity extends AppCompatActivity {
 
         getWindow().setStatusBarColor(getColor(R.color.black));
 
-        //sliderpager = findViewById(R.id.slider_pager) ;
-        //indicator = findViewById(R.id.indicator);
+
         recyclerView = findViewById(R.id.recyclerViewMain);
         refreshLayout = findViewById(R.id.refreshMovies);
         viewAll = findViewById(R.id.TextViewViewAllRecentlyReleased);
-        //progressSlide = findViewById(R.id.progressSlides);
         circleImageView = findViewById(R.id.ImageViewlogo);
         name = findViewById(R.id.nameMainActivity);
         fab = findViewById(R.id.fab_create);
 
-        name.setText("Hello "+ UserAppData.getInstance().getCurrentUser().getDisplayName());
+        name.setText("Hello " + UserAppData.getInstance().getCurrentUser().getDisplayName());
 
 
         circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,ActivityProfile.class);
+                Intent intent = new Intent(MainActivity.this, ActivityProfile.class);
                 startActivity(intent);
             }
         });
@@ -114,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
         viewAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,RecentyReleasedActivity.class);
+                Intent intent = new Intent(MainActivity.this, RecentyReleasedActivity.class);
                 startActivity(intent);
 
             }
@@ -123,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,UploadActivity.class));
+                startActivity(new Intent(MainActivity.this, UploadActivity.class));
             }
         });
 
@@ -132,8 +130,7 @@ public class MainActivity extends AppCompatActivity {
             public void onRefresh() {
                 list.clear();
                 adapter.notifyDataSetChanged();
-                queue.add(request);
-                new Sync().execute(URL);
+                new Sync().execute();
 
             }
         });
@@ -149,46 +146,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(13),false));
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(13), false));
 
 
+        new Sync().execute();
 
-
-        queue = Volley.newRequestQueue(MainActivity.this);
-        new Sync().execute(URL);
-
-
-        //loadSlides();
         loadRecyclerView();
     }
-
-/*    void loadSlides(){
-        slideadapter = new SliderPagerAdapter(this);
-        sliderpager.setAdapter(slideadapter);
-
-        final Handler handler = new Handler();
-        final Runnable update = new Runnable() {
-            @Override
-            public void run() {
-                if(sliderpager.getCurrentItem() == SlideAppData.getInstance().getArrayList().size()-1){
-                    sliderpager.setCurrentItem(0);
-                }
-
-                else{
-                    sliderpager.setCurrentItem(sliderpager.getCurrentItem()+1,true);
-                }
-            }
-        };
-
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                handler.post(update);
-            }
-        },4000,6000);
-
-        indicator.setupWithViewPager(sliderpager,true);
-    }*/
 
     void loadRecyclerView(){
         adapter = new RecyclerViewAdapter(list,MainActivity.this);
@@ -197,105 +161,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
     }
-
-
-    public void fetch(String url){
-        request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                for( int i = 0; i<response.length(); i++){
-                    try {
-                        JSONObject object = response.getJSONObject(i);
-                        list.add(new ProjectModel(object.getString("title"),object.getString("price"),object.getString("image_link"),object.getString("publish_date"),object.getString("desc"),object.getString("size"),object.getString("author"),object.getString("co_author"),object.getString("projectURL"),object.getString("instagramPostURL")));
-                        refreshLayout.setRefreshing(false);
-                        adapter.notifyDataSetChanged();
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        refreshLayout.setRefreshing(false);
-                        hide();
-                    }
-                }
-
-                show();
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                String message = null;
-                if (error instanceof NoConnectionError) {
-                    message = "Cannot connect to Internet...Please check your connection!";
-                } else if (error instanceof ServerError) {
-                    message = "The server could not be found. Please try again after some time!!";
-                } else if (error instanceof AuthFailureError) {
-                    message = "Cannot connect to Internet...Please check your connection!";
-                } else if (error instanceof ParseError) {
-                    message = "Parsing error! Please try again after some time!!";
-                } else if (error instanceof NetworkError) {
-                    message = "Cannot connect to Internet...Please check your connection!";
-                } else if (error instanceof TimeoutError) {
-                    message = "Connection TimeOut! Please check your internet connection.";
-                }
-
-                if(message!=null)
-                    Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
-                refreshLayout.setRefreshing(false);
-                hide();
-
-            }
-        });
-        queue.add(request);
-    }
-
-   /* public void fetchSlide(String url){
-        requestSlide = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                for( int i = 0; i<response.length(); i++){
-                    try {
-                        JSONObject object = response.getJSONObject(i);
-                        SlideAppData.getInstance().getArrayList().add(new Slide(object.getString("url"),object.getString("link")));
-                        progressSlide.setVisibility(View.GONE);
-                        slideadapter.notifyDataSetChanged();
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        progressSlide.setVisibility(View.GONE);
-                        hide();
-                    }
-                }
-
-                show();
-
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                String message = null;
-                if (error instanceof NoConnectionError) {
-                    message = "Cannot connect to Internet...Please check your connection!";
-                } else if (error instanceof ServerError) {
-                    message = "The server could not be found. Please try again after some time!!";
-                } else if (error instanceof AuthFailureError) {
-                    message = "Cannot connect to Internet...Please check your connection!";
-                } else if (error instanceof ParseError) {
-                    message = "Parsing error! Please try again after some time!!";
-                } else if (error instanceof NetworkError) {
-                    message = "Cannot connect to Internet...Please check your connection!";
-                } else if (error instanceof TimeoutError) {
-                    message = "Connection TimeOut! Please check your internet connection.";
-                }
-
-                progressSlide.setVisibility(View.GONE);
-                hide();
-            }
-        });
-        queue.add(requestSlide);
-    }*/
-
 
 
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
@@ -339,15 +204,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private class Sync extends AsyncTask<String, Void, Void > {
+    private class Sync extends AsyncTask<Void, Void, Void > {
         @Override
         protected void onPreExecute() {
             refreshLayout.setRefreshing(true);
         }
 
         @Override
-        protected Void doInBackground(String... strings) {
-            fetch(strings[0]);
+        protected Void doInBackground(Void... voids) {
+            fetchData();
             return null;
         }
     }
@@ -358,7 +223,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         SlideAppData.getInstance().getArrayList().clear();
-        //fetchSlide(SlideURL);
     }
 
     @Override
@@ -370,17 +234,36 @@ public class MainActivity extends AppCompatActivity {
     void hide(){
         viewAll.setVisibility(View.GONE);
         recyclerView.setVisibility(View.GONE);
-        //sliderpager.setVisibility(View.GONE);
-        //indicator.setVisibility(View.GONE);
         refreshLayout.setVisibility(View.GONE);
-        //progressSlide.setVisibility(View.GONE);
     }
 
     void show(){
         viewAll.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.VISIBLE);
-        //sliderpager.setVisibility(View.VISIBLE);
-        //indicator.setVisibility(View.VISIBLE);
         refreshLayout.setVisibility(View.VISIBLE);
+    }
+
+    void fetchData(){
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Projects");
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    ProjectModel model = snapshot.getValue(ProjectModel.class);
+                    list.add(model);
+                    refreshLayout.setRefreshing(false);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d("Database Error reading: ", databaseError.getDetails());
+                refreshLayout.setRefreshing(false);
+                hide();
+            }
+        });
+
+        show();
     }
 }

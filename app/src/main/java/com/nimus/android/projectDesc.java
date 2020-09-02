@@ -28,7 +28,7 @@ public class projectDesc extends AppCompatActivity {
     ImageView back;
     private RewardedAd rewardedAd;
     Button viewAd, viewOptions;
-    TextView author,title,description,date,price,size,co_author;
+    TextView author,title,description,date,price,co_author;
     ImageView imageView;
     RewardedAdLoadCallback adLoadCallback;
 
@@ -48,19 +48,17 @@ public class projectDesc extends AppCompatActivity {
         date = findViewById(R.id.textViewDate);
         price = findViewById(R.id.textViewPrice);
         imageView = findViewById(R.id.imageDesc);
-        size = findViewById(R.id.size);
         co_author = findViewById(R.id.co_author);
 
 
-        author.setText(AppDataModel.getInstance().getArrayList().get(0).getAuthor());
+        author.setText(AppDataModel.getInstance().getArrayList().get(0).getUser());
         title.setText(AppDataModel.getInstance().getArrayList().get(0).getTitle());
         description.setText(AppDataModel.getInstance().getArrayList().get(0).getDesc());
-        date.setText(AppDataModel.getInstance().getArrayList().get(0).getPublishDate());
-        price.setText(AppDataModel.getInstance().getArrayList().get(0).getPrice());
-        size.setText(AppDataModel.getInstance().getArrayList().get(0).getSize());
-        co_author.setText(AppDataModel.getInstance().getArrayList().get(0).getCoAuthor());
+        date.setText(AppDataModel.getInstance().getArrayList().get(0).getDate());
+        price.setText(AppDataModel.getInstance().getArrayList().get(0).getCost());
+        co_author.setText(AppDataModel.getInstance().getArrayList().get(0).getCategory());
         Glide.with(projectDesc.this)
-                .load(AppDataModel.getInstance().getArrayList().get(0).getDisplayImageURL())
+                .load(AppDataModel.getInstance().getArrayList().get(0).getImageURL())
                 .placeholder(R.color.black)
                 .centerCrop()
                 .into(imageView);
@@ -143,7 +141,7 @@ public class projectDesc extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(projectDesc.this, "Redirect", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(projectDesc.this,Browser.class);
-                intent.putExtra("URL", AppDataModel.getInstance().getArrayList().get(0).getProjectURL());
+                intent.putExtra("URL", AppDataModel.getInstance().getArrayList().get(0).getUrl());
                 intent.putExtra("code",1);
                 startActivity(intent);
             }
