@@ -15,14 +15,8 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,35 +25,31 @@ import com.google.firebase.database.ValueEventListener;
 import com.nimus.android.Adapters.RecyclerViewAdapter;
 import com.nimus.android.Models.ProjectModel;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 
-public class RecentyReleasedActivity extends AppCompatActivity {
+public class MyProjectsAcivity extends AppCompatActivity {
 
     private ImageView back;
     private RecyclerView recyclerView;
     private RecyclerViewAdapter adapter;
-    private ArrayList<ProjectModel> list2 = new ArrayList<>();
+    private ArrayList<ProjectModel> list = new ArrayList<>();
     private SwipeRefreshLayout refreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recenty_released);
+        setContentView(R.layout.activity_my_projects_acivity);
 
         getWindow().setStatusBarColor(getResources().getColor(R.color.black,getTheme()));
 
-        back  = findViewById(R.id.ImageViewBackRecentlyReleased);
-        recyclerView = findViewById(R.id.recyclerViewRecentlyReleased);
-        refreshLayout = findViewById(R.id.refreshReleased);
+        back  = findViewById(R.id.ImageViewBackMyProjects);
+        recyclerView = findViewById(R.id.recyclerViewMyProjects);
+        refreshLayout = findViewById(R.id.refreshMyProjects);
 
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                list2.clear();
+                list.clear();
                 adapter.notifyDataSetChanged();
                 fetchData();
             }
@@ -76,7 +66,7 @@ public class RecentyReleasedActivity extends AppCompatActivity {
             }
         });
 
-        recyclerView.addItemDecoration(new RecentyReleasedActivity.GridSpacingItemDecoration(2, dpToPx(15),false));
+        recyclerView.addItemDecoration(new MyProjectsAcivity.GridSpacingItemDecoration(2, dpToPx(15),false));
 
 
 
@@ -87,15 +77,15 @@ public class RecentyReleasedActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RecentyReleasedActivity.this,MainActivity.class);
+                Intent intent = new Intent(MyProjectsAcivity.this,ActivityProfile.class);
                 startActivity(intent);
             }
         });
     }
 
     void loadRecyclerView(){
-        adapter = new RecyclerViewAdapter(list2,RecentyReleasedActivity.this);
-        RecyclerView.LayoutManager manager = new GridLayoutManager(RecentyReleasedActivity.this,2);
+        adapter = new RecyclerViewAdapter(list,MyProjectsAcivity.this);
+        RecyclerView.LayoutManager manager = new GridLayoutManager(MyProjectsAcivity.this,2);
         recyclerView.setLayoutManager(manager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
@@ -152,9 +142,13 @@ public class RecentyReleasedActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     ProjectModel model = snapshot.getValue(ProjectModel.class);
-                    list2.add(model);
-                    refreshLayout.setRefreshing(false);
-                    adapter.notifyDataSetChanged();
+                    if(model!=null){
+                        if(model.getUid().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+                            list.add(model);
+                            refreshLayout.setRefreshing(false);
+                            adapter.notifyDataSetChanged();
+                        }
+                    }
                 }
             }
 

@@ -20,7 +20,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Category"
+        android:hint="Category/Technology (For instance Android)"
         android:id="@+id/et_category"
         android:layout_marginTop="10dp"/>
     <EditText
@@ -30,18 +30,26 @@
         android:id="@+id/et_description"
         android:layout_marginTop="10dp"/>
     <EditText
-        android:layout_width="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="GitHub url"
+    android:id="@+id/et_githubURL"
+    android:layout_marginTop="10dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="GitHub url"
-        android:id="@+id/et_githubURL"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:text="Select"
+        android:id="@+id/button_select_project"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Upload"
-        android:id="@+id/button_upload_project"/>
+        android:id="@+id/button_upload_project"
+        android:visibility="gone"/>
 
 
 
