@@ -67,4 +67,7 @@ dependencies {
 
     // google play Services
     implementation 'com.google.android.gms:play-services-auth:18.0.0'
+
+    //Animations
+    implementation 'com.airbnb.android:lottie:3.4.1'
 }
