@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,50 +7,402 @@
     android:layout_height="match_parent"
     tools:context=".UploadActivity"
     android:orientation="vertical"
-    android:padding="15dp">
+    android:paddingStart="15dp"
+    android:paddingEnd="15dp"
+    android:paddingBottom="15dp"
+    android:background="@color/black">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:id="@+id/topBarUpload"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/backUpload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_chevron_left_white_24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Share your Project"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginStart="20dp"
+            app:layout_constraintStart_toEndOf="@+id/backUpload"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Project Name/Title"
-        android:id="@+id/et_title"
-        android:layout_marginTop="30dp"/>
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topBarUpload"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingBottom="25dp">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Category/Technology (For instance Android)"
-        android:id="@+id/et_category"
-        android:layout_marginTop="10dp"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Description"
-        android:id="@+id/et_description"
-        android:layout_marginTop="10dp"/>
-    <EditText
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:hint="GitHub url"
-    android:id="@+id/et_githubURL"
-    android:layout_marginTop="10dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Select"
-        android:id="@+id/button_select_project"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:id="@+id/LinearLayoutTitle">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Upload"
-        android:id="@+id/button_upload_project"
-        android:visibility="gone"/>
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:id="@+id/imageTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/ic_title_white"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="24dp"
+                    android:hint="Ex. MVVM in Android"
+                    android:layout_marginStart="15dp"
+                    android:gravity="center_vertical"
+                    android:background="@null"
+                    android:textSize="13sp"
+                    android:textStyle="normal"
+                    android:id="@+id/et_title"
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toEndOf="@id/imageTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:maxLines="@integer/google_play_services_version"
+                    android:inputType="text"
+                    android:cursorVisible="true"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0.5dp"
+                    android:background="@color/grey"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imageTitle"
+                    android:layout_marginStart="15dp"
+                    app:layout_constraintTop_toBottomOf="@id/et_title"
+                    android:id="@+id/viewTitle">
+
+                </View>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textTitle"
+                    android:layout_marginStart="15dp"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toEndOf="@id/imageTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/viewTitle"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/white"
+                    android:text="Give your Project a title, try to keep it under 50 words and descriptive. This is how other people will reach your project.">
+
+                </TextView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
-</LinearLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:id="@+id/LinearLayoutTechnology">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:id="@+id/imageTech"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/ic_dev_white"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="24dp"
+                    android:hint="Ex. Android Studio"
+                    android:layout_marginStart="15dp"
+                    android:gravity="center_vertical"
+                    android:background="@null"
+                    android:textSize="13sp"
+                    android:textStyle="normal"
+                    android:id="@+id/et_category"
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toEndOf="@id/imageTech"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:inputType="text"
+                    android:maxLines="@integer/google_play_services_version"
+                    android:cursorVisible="true"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0.5dp"
+                    android:background="@color/grey"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imageTech"
+                    android:layout_marginStart="15dp"
+                    app:layout_constraintTop_toBottomOf="@id/et_category"
+                    android:id="@+id/viewTech">
+
+                </View>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/TextTech"
+                    android:layout_marginStart="15dp"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toEndOf="@id/imageTech"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/viewTech"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/white"
+                    android:text="Specify the technology used or your project is based on.">
+
+                </TextView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:id="@+id/LinearLayoutDesc">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:id="@+id/imageDesc"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/ic_projects_white"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Ex. This project.........."
+                    android:layout_marginStart="15dp"
+                    android:gravity="center_vertical"
+                    android:background="@null"
+                    android:textSize="13sp"
+                    android:textStyle="normal"
+                    android:id="@+id/et_description"
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toEndOf="@id/imageDesc"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:cursorVisible="true"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0.5dp"
+                    android:background="@color/grey"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imageDesc"
+                    android:layout_marginStart="15dp"
+                    app:layout_constraintTop_toBottomOf="@id/et_description"
+                    android:id="@+id/viewDesc">
+
+                </View>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/TextDesc"
+                    android:layout_marginStart="15dp"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toEndOf="@id/imageDesc"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/viewDesc"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/white"
+                    android:text="Describe your project briefly, try to keep it under 250 words and descriptive.">
+
+                </TextView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:id="@+id/LinearLayoutGithubURL">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:id="@+id/imageGithubURL"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/ic_url_white"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="24dp"
+                    android:hint="Ex. www.github.com/AbhinandanSingh11"
+                    android:layout_marginStart="15dp"
+                    android:gravity="center_vertical"
+                    android:background="@null"
+                    android:textSize="13sp"
+                    android:textStyle="normal"
+                    android:id="@+id/et_githubURL"
+                    android:textColorHint="@color/white"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toEndOf="@id/imageGithubURL"
+                    android:maxLines="@integer/google_play_services_version"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:inputType="textUri"
+                    android:cursorVisible="true"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0.5dp"
+                    android:background="@color/grey"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imageGithubURL"
+                    android:layout_marginStart="15dp"
+                    app:layout_constraintTop_toBottomOf="@id/et_githubURL"
+                    android:id="@+id/viewGithubURL">
+
+                </View>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/TextGithubURL"
+                    android:layout_marginStart="15dp"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toEndOf="@id/imageGithubURL"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/viewGithubURL"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/white"
+                    android:text="Specify the url of GitHub repo for this project. This is how other people will access/view your project .">
+
+                </TextView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Select"
+                android:textColor="@color/white"
+                android:layout_gravity="right"
+                android:background="@drawable/button_bright_green"
+                android:id="@+id/button_select_project"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Upload"
+                android:layout_gravity="right"
+                android:textColor="@color/white"
+                android:background="@drawable/button_bright_green"
+                android:id="@+id/button_upload_project"
+                android:visibility="gone"/>
+
+
+
+            <!--<EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Project Name/Title"
+                android:id="@+id/et_title"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:backgroundTint="@color/pink"
+                android:layout_marginTop="30dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/pink"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:hint="Android, Cloud, Web......"
+                android:id="@+id/et_category"
+                android:layout_marginTop="10dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Description"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:backgroundTint="@color/pink"
+                android:id="@+id/et_description"
+                android:layout_marginTop="10dp"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="GitHub url"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:backgroundTint="@color/pink"
+                android:id="@+id/et_githubURL"
+                android:layout_marginTop="10dp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:text="Select"
+                android:textColor="@color/white"
+                android:layout_gravity="right"
+                android:background="@drawable/button_bright_green"
+                android:id="@+id/button_select_project"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:text="Upload"
+                android:layout_gravity="right"
+                android:textColor="@color/white"
+                android:background="@drawable/button_bright_green"
+                android:id="@+id/button_upload_project"
+                android:visibility="gone"/>-->
+
+        </LinearLayout>
+
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

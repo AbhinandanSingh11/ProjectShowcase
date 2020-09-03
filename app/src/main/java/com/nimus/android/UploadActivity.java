@@ -5,14 +5,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,8 +28,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.text.DateFormat;
-import java.text.FieldPosition;
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -44,6 +41,7 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
 
     private EditText title,category,desc,url;
     private Button upload,select;
+    private ImageView back;
     private String titleText, categoryText, descText, urlText;
     private String name, email, uid, image;
     private String date;
@@ -62,6 +60,7 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
         url = findViewById(R.id.et_githubURL);
         upload = findViewById(R.id.button_upload_project);
         select = findViewById(R.id.button_select_project);
+        back = findViewById(R.id.backUpload);
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Projects");
 
@@ -71,6 +70,7 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
         url.setOnClickListener(this);
         upload.setOnClickListener(this);
         select.setOnClickListener(this);
+        back.setOnClickListener(this);
 
     }
 
@@ -90,6 +90,10 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, RESULT_LOAD_IMAGE);
                 break;
+            }
+
+            case R.id.backUpload:{
+                startActivity(new Intent(UploadActivity.this,MainActivity.class));
             }
 
         }
@@ -122,7 +126,7 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
-                            Toast.makeText(UploadActivity.this, "uploaded", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UploadActivity.this, "Thanks For Contributing to DSC CU", Toast.LENGTH_SHORT).show();
                             title.setText(null);
                             category.setText(null);
                             desc.setText(null);
