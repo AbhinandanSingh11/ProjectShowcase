@@ -21,7 +21,10 @@ import com.google.android.gms.ads.rewarded.RewardItem;
 import com.google.android.gms.ads.rewarded.RewardedAd;
 import com.google.android.gms.ads.rewarded.RewardedAdCallback;
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
+import com.google.firebase.auth.FirebaseAuth;
 import com.nimus.android.AppData.AppDataModel;
+
+import java.util.Objects;
 
 public class projectDesc extends AppCompatActivity {
 
@@ -49,7 +52,6 @@ public class projectDesc extends AppCompatActivity {
         price = findViewById(R.id.textViewPrice);
         imageView = findViewById(R.id.imageDesc);
         co_author = findViewById(R.id.co_author);
-
 
         author.setText(AppDataModel.getInstance().getArrayList().get(0).getUser());
         title.setText(AppDataModel.getInstance().getArrayList().get(0).getTitle());

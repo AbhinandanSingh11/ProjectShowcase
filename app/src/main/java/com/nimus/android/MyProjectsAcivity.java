@@ -15,7 +15,10 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,6 +37,7 @@ public class MyProjectsAcivity extends AppCompatActivity {
     private RecyclerViewAdapter adapter;
     private ArrayList<ProjectModel> list = new ArrayList<>();
     private SwipeRefreshLayout refreshLayout;
+    private LinearLayout animationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,7 @@ public class MyProjectsAcivity extends AppCompatActivity {
         back  = findViewById(R.id.ImageViewBackMyProjects);
         recyclerView = findViewById(R.id.recyclerViewMyProjects);
         refreshLayout = findViewById(R.id.refreshMyProjects);
+        animationView = findViewById(R.id.animLayout);
 
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -145,10 +150,17 @@ public class MyProjectsAcivity extends AppCompatActivity {
                     if(model!=null){
                         if(model.getUid().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
                             list.add(model);
+                            animationView.setVisibility(View.GONE);
                             refreshLayout.setRefreshing(false);
                             adapter.notifyDataSetChanged();
                         }
                     }
+                }
+
+                if(list.size()<=0){
+                    refreshLayout.setRefreshing(false);
+                    Toast.makeText(MyProjectsAcivity.this, "No Projects Available", Toast.LENGTH_SHORT).show();
+                    animationView.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -158,5 +170,6 @@ public class MyProjectsAcivity extends AppCompatActivity {
                 refreshLayout.setRefreshing(false);
             }
         });
+
     }
 }
