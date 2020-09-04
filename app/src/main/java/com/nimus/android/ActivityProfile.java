@@ -50,6 +50,8 @@ public class ActivityProfile extends AppCompatActivity {
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(ActivityProfile.this,LoginActivity.class));
+                finish();
+                finishAffinity();
             }
         });
 
