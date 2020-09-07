@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,10 +23,7 @@ import com.google.android.gms.ads.rewarded.RewardItem;
 import com.google.android.gms.ads.rewarded.RewardedAd;
 import com.google.android.gms.ads.rewarded.RewardedAdCallback;
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
-import com.google.firebase.auth.FirebaseAuth;
 import com.nimus.android.AppData.AppDataModel;
-
-import java.util.Objects;
 
 public class projectDesc extends AppCompatActivity {
 
@@ -71,6 +70,13 @@ public class projectDesc extends AppCompatActivity {
 
         rewardedAd = new  RewardedAd(this,"ca-app-pub-3940256099942544/5224354917");
 
+        author.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(projectDesc.this,VisitUser.class));
+            }
+        });
+
         adLoadCallback = new RewardedAdLoadCallback(){
             @Override
             public void onRewardedAdLoaded() {
@@ -89,7 +95,6 @@ public class projectDesc extends AppCompatActivity {
 
         rewardedAd.loadAd(new AdRequest.Builder().build(),adLoadCallback);
 
-
         viewAd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,14 +106,14 @@ public class projectDesc extends AppCompatActivity {
                         @Override
                         public void onRewardedAdOpened() {
                             super.onRewardedAdOpened();
-                            Toast.makeText(projectDesc.this, "Ad covered the screen", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(projectDesc.this, "Ad covered the screen", Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
                         public void onRewardedAdClosed() {
                             super.onRewardedAdClosed();
                             if(!state) {
-                                Toast.makeText(projectDesc.this, "Ad was closed, reward not earned", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(projectDesc.this, "Ad was closed, reward not earned", Toast.LENGTH_SHORT).show();
                                 viewAd.setText("Loading...");
                                 viewAd.setTextColor(getResources().getColor(R.color.grey_500,getTheme()));
                                 viewAd.setBackground(getResources().getDrawable(R.drawable.button_loading,getTheme()));
@@ -119,13 +124,13 @@ public class projectDesc extends AppCompatActivity {
                         @Override
                         public void onRewardedAdFailedToShow(int i) {
                             super.onRewardedAdFailedToShow(i);
-                            Toast.makeText(projectDesc.this, "Ad failed to show", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(projectDesc.this, "Ad failed to show", Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
                         public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
                             state = true;
-                            Toast.makeText(projectDesc.this, "User earned the reward", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(projectDesc.this, "User earned the reward", Toast.LENGTH_SHORT).show();
                             viewAd.setVisibility(View.GONE);
                             viewOptions.setVisibility(View.VISIBLE);
                         }
@@ -133,7 +138,7 @@ public class projectDesc extends AppCompatActivity {
                     rewardedAd.show(activity,rewardedAdCallback);
                 }
                 else{
-                    Toast.makeText(activity, "Ad wasn't loaded properly", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(activity, "Ad wasn't loaded properly", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -141,11 +146,14 @@ public class projectDesc extends AppCompatActivity {
         viewOptions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(projectDesc.this, "Redirect", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(projectDesc.this,Browser.class);
-                intent.putExtra("URL", AppDataModel.getInstance().getArrayList().get(0).getUrl());
-                intent.putExtra("code",1);
-                startActivity(intent);
+                try {
+                Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(AppDataModel.getInstance().getArrayList().get(0).getUrl()));
+                startActivity(myIntent);
+                } catch (ActivityNotFoundException e) {
+                    Toast.makeText(projectDesc.this, "No application can handle this request."
+                        + " Please install a web browser",  Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
+            }
             }
         });
 

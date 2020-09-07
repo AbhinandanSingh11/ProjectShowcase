@@ -33,7 +33,6 @@ public class Browser extends AppCompatActivity {
 
 
         URL = getIntent().getStringExtra("URL");
-        code = getIntent().getIntExtra("code",0);
 
         webView = findViewById(R.id.webview);
         progressBar = findViewById(R.id.progressBrowser);
@@ -42,7 +41,9 @@ public class Browser extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Nav(code);
+                Intent intent = new Intent(Browser.this,ActivityProfile.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -65,26 +66,5 @@ public class Browser extends AppCompatActivity {
         public void setValue(int progress){
             progressBar.setProgress(progress);
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        URL= null;
-        code = 0;
-    }
-
-    void Nav(int code){
-        Intent intent;
-        if(code == 0){
-            intent = new Intent(Browser.this, MainActivity.class);
-            startActivity(intent);
-        }
-        if(code == 1){
-            intent = new Intent(Browser.this, projectDesc.class);
-            startActivity(intent);
-        }
-
-
     }
 }

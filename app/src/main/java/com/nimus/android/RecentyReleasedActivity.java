@@ -15,6 +15,7 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -44,6 +45,7 @@ public class RecentyReleasedActivity extends AppCompatActivity {
     private RecyclerViewAdapter adapter;
     private ArrayList<ProjectModel> list2 = new ArrayList<>();
     private SwipeRefreshLayout refreshLayout;
+    private LinearLayout anim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,7 @@ public class RecentyReleasedActivity extends AppCompatActivity {
         back  = findViewById(R.id.ImageViewBackRecentlyReleased);
         recyclerView = findViewById(R.id.recyclerViewRecentlyReleased);
         refreshLayout = findViewById(R.id.refreshReleased);
+        anim = findViewById(R.id.animLayoutRR);
 
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -153,8 +156,15 @@ public class RecentyReleasedActivity extends AppCompatActivity {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     ProjectModel model = snapshot.getValue(ProjectModel.class);
                     list2.add(model);
+                    anim.setVisibility(View.GONE);
                     refreshLayout.setRefreshing(false);
                     adapter.notifyDataSetChanged();
+                }
+
+                if(list2.size()<=0){
+                    refreshLayout.setRefreshing(false);
+                    Toast.makeText(RecentyReleasedActivity.this, "No Projects Available", Toast.LENGTH_SHORT).show();
+                    anim.setVisibility(View.VISIBLE);
                 }
             }
 

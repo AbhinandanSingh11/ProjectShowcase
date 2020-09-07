@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
     private SwipeRefreshLayout refreshLayout;
     private TextView viewAll;
     private FloatingActionButton fab;
+    private LinearLayout anim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
         circleImageView = findViewById(R.id.ImageViewlogo);
         name = findViewById(R.id.nameMainActivity);
         fab = findViewById(R.id.fab_create);
+        anim = findViewById(R.id.animLayoutMain);
 
         name.setText("Hello " + UserAppData.getInstance().getCurrentUser().getDisplayName());
 
@@ -251,8 +253,15 @@ public class MainActivity extends AppCompatActivity {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     ProjectModel model = snapshot.getValue(ProjectModel.class);
                     list.add(model);
+                    anim.setVisibility(View.GONE);
                     refreshLayout.setRefreshing(false);
                     adapter.notifyDataSetChanged();
+                }
+
+                if(list.size()<=0){
+                    refreshLayout.setRefreshing(false);
+                    Toast.makeText(MainActivity.this, "No Projects Available", Toast.LENGTH_SHORT).show();
+                    anim.setVisibility(View.VISIBLE);
                 }
             }
 

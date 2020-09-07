@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -60,7 +58,8 @@
                 android:layout_height="match_parent"
                 android:paddingStart="15dp"
                 android:paddingEnd="15dp"
-                android:paddingTop="10dp">
+                android:paddingTop="10dp"
+                android:paddingBottom="15dp">
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -320,7 +319,7 @@
                     <ImageView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:background="@drawable/bg_pink"
+                        android:background="@drawable/bg_bg"
                         android:src="@drawable/ic_projects_white"
                         android:scaleType="centerInside"/>
                     <TextView
@@ -345,13 +344,38 @@
                     <ImageView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:background="@drawable/bg_pink"
+                        android:background="@drawable/bg_bg"
                         android:src="@drawable/ic_logout_white"
                         android:scaleType="centerInside"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Logout"
+                        android:layout_marginStart="10dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:gravity="center_vertical"
+                    android:id="@+id/layoutSettings"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutLogout">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/bg_bg"
+                        android:src="@drawable/ic_settings_white"
+                        android:scaleType="centerInside"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Profile Settings"
                         android:layout_marginStart="10dp"
                         android:textStyle="bold"
                         android:textColor="@color/white"/>

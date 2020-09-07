@@ -122,6 +122,9 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
             map.put("date",date);
 
             if(map.containsKey("imageURL")){
+
+
+
                 databaseReference.push().setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

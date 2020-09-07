@@ -25,6 +25,18 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.nimus.android.Models.User;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -129,9 +141,9 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                            startActivity(intent);
+                            final FirebaseUser user = mAuth.getCurrentUser();
+                            addUser(user);
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
@@ -152,4 +164,29 @@ public class LoginActivity extends AppCompatActivity {
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
     // [END signin]
+
+    private void addUser(FirebaseUser user){
+        if(user!=null){
+
+            Map<String, String> map = new HashMap<>();
+            map.put("email",user.getEmail());
+            map.put("image",user.getPhotoUrl().toString());
+            map.put("name",user.getDisplayName());
+            map.put("uid",user.getUid());
+
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
+            databaseReference.setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful()){
+                        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                        startActivity(intent);
+                    }
+                    else{
+                        Toast.makeText(LoginActivity.this, "Something went wrong, try again!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+    }
 }
