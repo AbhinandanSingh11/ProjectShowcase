@@ -2,6 +2,7 @@ package com.nimus.android;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ public class Settings extends AppCompatActivity {
     private String instagram, linkedin, github, currentPosition, bio;
     private DatabaseReference reference;
     private String uid;
+    private CardView progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class Settings extends AppCompatActivity {
         mBio = findViewById(R.id.et_bio);
         save = findViewById(R.id.saveSettings);
         back = findViewById(R.id.backSettings);
+        progress = findViewById(R.id.progressSave);
 
         if(FirebaseAuth.getInstance().getCurrentUser()!=null){
             uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -71,6 +74,7 @@ public class Settings extends AppCompatActivity {
 
 
     private void getData(){
+        progress.setVisibility(View.VISIBLE);
         reference = FirebaseDatabase.getInstance().getReference("users").child(uid);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -107,17 +111,20 @@ public class Settings extends AppCompatActivity {
                     }else{
                         mBio.setHint("Add Bio");
                     }
+
+                    progress.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                progress.setVisibility(View.GONE);
             }
         });
     }
 
     private void saveData(){
+        progress.setVisibility(View.VISIBLE);
         instagram = mInstagram.getText().toString().trim();
         linkedin = mLinkedIn.getText().toString().trim();
         github = mGithub.getText().toString().trim();
@@ -137,10 +144,10 @@ public class Settings extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
-                        Toast.makeText(Settings.this, "Saved!", Toast.LENGTH_SHORT).show();
+
                     }
                     else{
-                        Toast.makeText(Settings.this, "Something went wrong, try again!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Settings.this, "Instagram not updated, try again!", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -150,10 +157,10 @@ public class Settings extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
-                        Toast.makeText(Settings.this, "Saved!", Toast.LENGTH_SHORT).show();
+
                     }
                     else{
-                        Toast.makeText(Settings.this, "Something went wrong, try again!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Settings.this, "Instagram not updated, try again!", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -166,10 +173,10 @@ public class Settings extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
-                        Toast.makeText(Settings.this, "Saved!", Toast.LENGTH_SHORT).show();
+
                     }
                     else{
-                        Toast.makeText(Settings.this, "Something went wrong, try again!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Settings.this, "LinkedIn not updated, try again!", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -179,10 +186,10 @@ public class Settings extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
-                        Toast.makeText(Settings.this, "Saved!", Toast.LENGTH_SHORT).show();
+
                     }
                     else{
-                        Toast.makeText(Settings.this, "Something went wrong, try again!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Settings.this, "LinkedIn not updated, try again!", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -195,10 +202,10 @@ public class Settings extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
-                        Toast.makeText(Settings.this, "Saved!", Toast.LENGTH_SHORT).show();
+
                     }
                     else{
-                        Toast.makeText(Settings.this, "Something went wrong, try again!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Settings.this, "Github not updated, try again!", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -208,10 +215,10 @@ public class Settings extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
-                        Toast.makeText(Settings.this, "Saved!", Toast.LENGTH_SHORT).show();
+
                     }
                     else{
-                        Toast.makeText(Settings.this, "Something went wrong, try again!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Settings.this, "Github not updated, try again!", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -224,10 +231,10 @@ public class Settings extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
-                        Toast.makeText(Settings.this, "Saved!", Toast.LENGTH_SHORT).show();
+
                     }
                     else{
-                        Toast.makeText(Settings.this, "Something went wrong, try again!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Settings.this, "Current position not updated, try again!", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -237,10 +244,10 @@ public class Settings extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
-                        Toast.makeText(Settings.this, "Saved!", Toast.LENGTH_SHORT).show();
+
                     }
                     else{
-                        Toast.makeText(Settings.this, "Something went wrong, try again!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Settings.this, "Current position not updated, try again!", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -253,10 +260,10 @@ public class Settings extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
-                        Toast.makeText(Settings.this, "Saved!", Toast.LENGTH_SHORT).show();
+
                     }
                     else{
-                        Toast.makeText(Settings.this, "Something went wrong, try again!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Settings.this, "Bio not updated, try again!", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -266,13 +273,16 @@ public class Settings extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
-                        Toast.makeText(Settings.this, "Saved!", Toast.LENGTH_SHORT).show();
+
                     }
                     else{
-                        Toast.makeText(Settings.this, "Something went wrong, try again!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Settings.this, "Bio not updated, try again!", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
         }
+
+        Toast.makeText(this, "Updated", Toast.LENGTH_SHORT).show();
+        progress.setVisibility(View.GONE);
     }
 }

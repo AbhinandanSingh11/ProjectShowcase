@@ -113,12 +113,100 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Account"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/SecondbarProfile"
+                    android:textColor="@color/grey_100"
+                    android:id="@+id/headingAccount"
+                    android:layout_marginTop="20dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:gravity="center_vertical"
+                    android:id="@+id/layoutMyProjects"
+                    android:clickable="true"
+                    app:layout_constraintTop_toBottomOf="@+id/headingAccount">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/bg_pink"
+                        android:src="@drawable/ic_projects_white"
+                        android:scaleType="centerInside"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="My Projects"
+                        android:layout_marginStart="10dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:gravity="center_vertical"
+                    android:id="@+id/layoutLogout"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutMyProjects">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/bg_pink"
+                        android:src="@drawable/ic_logout_white"
+                        android:scaleType="centerInside"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Logout"
+                        android:layout_marginStart="10dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:gravity="center_vertical"
+                    android:id="@+id/layoutSettings"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutLogout">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/bg_pink"
+                        android:src="@drawable/ic_settings_white"
+                        android:scaleType="centerInside"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Profile Settings"
+                        android:layout_marginStart="10dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"/>
+
+                </LinearLayout>
+
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Feedback"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/SecondbarProfile"
+                    app:layout_constraintTop_toBottomOf="@id/layoutShare"
                     android:textColor="@color/grey_100"
                     android:id="@+id/headinFeedbackProfile"
                     android:layout_marginTop="20dp"/>
@@ -181,7 +269,7 @@
                     android:layout_height="wrap_content"
                     android:text="Application"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/layoutFeedback"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutSettings"
                     android:textColor="@color/grey_100"
                     android:id="@+id/headinApplicationProfile"
                     android:layout_marginTop="20dp"/>
@@ -241,7 +329,7 @@
                     android:layout_height="wrap_content"
                     android:text="Safety"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/layoutShare"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutFeedback"
                     android:textColor="@color/grey_100"
                     android:id="@+id/headinSafetyProfile"
                     android:layout_marginTop="20dp"/>
@@ -258,7 +346,7 @@
                     <ImageView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:background="@drawable/bg_pink"
+                        android:background="@drawable/bg_bg"
                         android:src="@drawable/privacy_white"
                         android:scaleType="centerInside"/>
                     <TextView
@@ -283,99 +371,13 @@
                     <ImageView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:background="@drawable/bg_pink"
+                        android:background="@drawable/bg_bg"
                         android:src="@drawable/ad_white"
                         android:scaleType="centerInside"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="why Ad's"
-                        android:layout_marginStart="10dp"
-                        android:textStyle="bold"
-                        android:textColor="@color/white"/>
-
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Account"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/layoutAd"
-                    android:textColor="@color/grey_100"
-                    android:id="@+id/headingAccount"
-                    android:layout_marginTop="20dp"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="20dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:gravity="center_vertical"
-                    android:id="@+id/layoutMyProjects"
-                    android:clickable="true"
-                    app:layout_constraintTop_toBottomOf="@+id/headingAccount">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:background="@drawable/bg_bg"
-                        android:src="@drawable/ic_projects_white"
-                        android:scaleType="centerInside"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="My Projects"
-                        android:layout_marginStart="10dp"
-                        android:textStyle="bold"
-                        android:textColor="@color/white"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="15dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:gravity="center_vertical"
-                    android:id="@+id/layoutLogout"
-                    app:layout_constraintTop_toBottomOf="@+id/layoutMyProjects">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:background="@drawable/bg_bg"
-                        android:src="@drawable/ic_logout_white"
-                        android:scaleType="centerInside"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Logout"
-                        android:layout_marginStart="10dp"
-                        android:textStyle="bold"
-                        android:textColor="@color/white"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="15dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:gravity="center_vertical"
-                    android:id="@+id/layoutSettings"
-                    app:layout_constraintTop_toBottomOf="@+id/layoutLogout">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:background="@drawable/bg_bg"
-                        android:src="@drawable/ic_settings_white"
-                        android:scaleType="centerInside"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Profile Settings"
                         android:layout_marginStart="10dp"
                         android:textStyle="bold"
                         android:textColor="@color/white"/>
