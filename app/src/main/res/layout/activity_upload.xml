@@ -341,68 +341,8 @@
                 android:id="@+id/button_upload_project"
                 android:visibility="gone"/>
 
-
-
-            <!--<EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Project Name/Title"
-                android:id="@+id/et_title"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:backgroundTint="@color/pink"
-                android:layout_marginTop="30dp"/>
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/pink"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:hint="Android, Cloud, Web......"
-                android:id="@+id/et_category"
-                android:layout_marginTop="10dp"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Description"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:backgroundTint="@color/pink"
-                android:id="@+id/et_description"
-                android:layout_marginTop="10dp"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="GitHub url"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:backgroundTint="@color/pink"
-                android:id="@+id/et_githubURL"
-                android:layout_marginTop="10dp"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:text="Select"
-                android:textColor="@color/white"
-                android:layout_gravity="right"
-                android:background="@drawable/button_bright_green"
-                android:id="@+id/button_select_project"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:text="Upload"
-                android:layout_gravity="right"
-                android:textColor="@color/white"
-                android:background="@drawable/button_bright_green"
-                android:id="@+id/button_upload_project"
-                android:visibility="gone"/>-->
-
         </LinearLayout>
 
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
