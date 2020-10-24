@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.nimus.android.AppData.AppDataModel;
 import com.nimus.android.Models.User;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -28,10 +29,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class VisitUser extends AppCompatActivity implements View.OnClickListener {
 
     private ImageView mEmail, mInsta, mLink, mGit,mBioP,mCurrentPos,back;
-    private String insta,linkedin,git;
+    private String insta,linkedin,git,email;
     private CircleImageView profileImage;
     private TextView name,mCurrentPosition,mBio;
-    private String uid;
+    private String uid, username, imageURL;
     private FirebaseUser user;
     private DatabaseReference reference;
     private String url = null;
@@ -68,21 +69,15 @@ public class VisitUser extends AppCompatActivity implements View.OnClickListener
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(VisitUser.this,MainActivity.class);
-                startActivity(intent);
-                finish();
+                VisitUser.super.onBackPressed();
             }
         });
     }
 
 
     private void setDetails(){
-        name.setText(user.getDisplayName());
-        Glide.with(VisitUser.this)
-                .load(user.getPhotoUrl())
-                .placeholder(R.color.white)
-                .into(profileImage);
-        reference = FirebaseDatabase.getInstance().getReference("users").child(uid);
+
+        reference = FirebaseDatabase.getInstance().getReference("users").child(AppDataModel.getInstance().getArrayList().get(0).getUid());
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -127,6 +122,17 @@ public class VisitUser extends AppCompatActivity implements View.OnClickListener
                         mBio.setVisibility(View.GONE);
                         mBioP.setVisibility(View.GONE);
                     }
+
+                    if(user.getName()!=null){
+                        name.setText(user.getName());
+                        Glide.with(VisitUser.this)
+                                .load(user.getImage())
+                                .placeholder(R.color.white)
+                                .into(profileImage);
+                    }
+                    if(user.getEmail()!=null){
+                        email = user.getEmail();
+                    }
                 }
             }
 
@@ -141,7 +147,7 @@ public class VisitUser extends AppCompatActivity implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.userMail: {
-                url = user.getEmail();
+                url = email;
                 Intent intent=new Intent(Intent.ACTION_SEND);
                 String[] recipients={url};
                 intent.putExtra(Intent.EXTRA_EMAIL, recipients);

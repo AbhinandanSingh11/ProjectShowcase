@@ -29,12 +29,12 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/dsc_logo" />
+            android:src="@drawable/dsccu" />
 
-        <TextView
+        <!--<TextView
             android:id="@+id/splashTexts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
             android:layout_marginBottom="5dp"
             android:layout_marginTop="10dp"
             android:textSize="15sp"
-            android:text="Developer Student Club"
+            android:text="Developer Student Clubs"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="#000"/>
@@ -76,7 +76,7 @@
                 android:textStyle="bold"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="@color/black"/>
-        </LinearLayout>
+        </LinearLayout>-->
 
 
 

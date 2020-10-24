@@ -61,7 +61,7 @@
                             <de.hdodenhof.circleimageview.CircleImageView
                                 android:layout_width="100dp"
                                 android:layout_height="100dp"
-                                android:src="@drawable/lecture"
+                                android:src="@color/black"
                                 app:civ_border_color="@color/white"
                                 app:civ_border_width="1dp"
                                 android:id="@+id/photoVisitProfile"/>
@@ -70,7 +70,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center_horizontal"
-                                android:text="Abhinandan Singh"
                                 android:textColor="@color/white"
                                 android:id="@+id/textName"
                                 android:textSize="15sp"

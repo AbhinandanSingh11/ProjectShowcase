@@ -90,8 +90,7 @@ public class RecentyReleasedActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RecentyReleasedActivity.this,MainActivity.class);
-                startActivity(intent);
+                RecentyReleasedActivity.super.onBackPressed();
             }
         });
     }

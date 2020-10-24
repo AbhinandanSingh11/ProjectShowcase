@@ -65,9 +65,7 @@ public class Settings extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Settings.this,ActivityProfile.class);
-                startActivity(intent);
-                finish();
+                Settings.super.onBackPressed();
             }
         });
     }

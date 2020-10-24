@@ -208,6 +208,7 @@
             android:id="@+id/ButtonAd"
             android:textColor="#fff"
             android:layout_marginBottom="10dp"
+            android:visibility="gone"
             android:background="@drawable/button_bright_green"
             android:textAllCaps="false"/>
 
@@ -222,7 +223,7 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/button_bright_green"
             android:textAllCaps="false"
-            android:visibility="gone"/>
+            android:visibility="visible"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

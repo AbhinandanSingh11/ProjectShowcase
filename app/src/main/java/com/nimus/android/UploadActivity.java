@@ -3,7 +3,9 @@ package com.nimus.android;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -47,6 +49,8 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
     private String date;
     private DatabaseReference databaseReference;
     private Map<String,String> map = new HashMap<>();
+    private ProgressDialog progressdialog;
+    private CardView progressBar;
 
 
     @Override
@@ -61,8 +65,11 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
         upload = findViewById(R.id.button_upload_project);
         select = findViewById(R.id.button_select_project);
         back = findViewById(R.id.backUpload);
+        progressBar = findViewById(R.id.progressUploadProjects);
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Projects");
+
+        progressdialog = new ProgressDialog(UploadActivity.this,R.style.CustomDialog);
 
         title.setOnClickListener(this);
         category.setOnClickListener(this);
@@ -78,6 +85,7 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.button_upload_project:{
+                progressBar.setVisibility(View.VISIBLE);
                 getUserInput();
                 getCurrentUserDetails();
                 getFormattedDate();
@@ -93,7 +101,7 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
             }
 
             case R.id.backUpload:{
-                startActivity(new Intent(UploadActivity.this,MainActivity.class));
+                super.onBackPressed();
             }
 
         }
@@ -137,9 +145,11 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
 
                             upload.setVisibility(View.GONE);
                             select.setVisibility(View.VISIBLE);
+                            progressBar.setVisibility(View.GONE);
                         }
                         else{
                             Toast.makeText(UploadActivity.this, "Failed to upload!!", Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
                         }
                     }
                 });
@@ -147,6 +157,7 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
                 Toast.makeText(this, "Please Upload the Image again!!", Toast.LENGTH_SHORT).show();
                 select.setVisibility(View.VISIBLE);
                 upload.setVisibility(View.GONE);
+                progressBar.setVisibility(View.GONE);
             }
 
 
@@ -209,7 +220,18 @@ public class UploadActivity extends AppCompatActivity implements View.OnClickLis
             public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
 
                 double progress = Math.round(100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                Toast.makeText(UploadActivity.this, "Uploading...." + progress + "%", Toast.LENGTH_SHORT).show();
+
+                if(progress < 100.00){
+                    progressdialog.setMessage("Uploading Photo...");
+                    progressdialog.setCanceledOnTouchOutside(false);
+                    progressdialog.create();
+                    progressdialog.show();
+                }
+
+                if (progress == 100.00){
+                    Toast.makeText(UploadActivity.this, "Photo Uploaded", Toast.LENGTH_SHORT).show();
+                    progressdialog.dismiss();
+                }
 
             }
         });

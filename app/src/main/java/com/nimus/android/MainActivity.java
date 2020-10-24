@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
@@ -47,6 +48,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.ligl.android.widget.iosdialog.IOSDialog;
 import com.nimus.android.Adapters.RecyclerViewAdapter;
 import com.nimus.android.Adapters.SliderPagerAdapter;
 import com.nimus.android.AppData.SlideAppData;
@@ -77,6 +79,12 @@ public class MainActivity extends AppCompatActivity {
     private TextView viewAll;
     private FloatingActionButton fab;
     private LinearLayout anim;
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        finishAffinity();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

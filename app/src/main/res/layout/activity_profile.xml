@@ -201,6 +201,8 @@
                 </LinearLayout>
 
 
+
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -267,9 +269,44 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Application"
+                    android:text="Special Programs"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/layoutSettings"
+                    android:textColor="@color/grey_100"
+                    android:id="@+id/headinEventsProfile"
+                    android:layout_marginTop="20dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:gravity="center_vertical"
+                    android:id="@+id/layoutSpecialEvents"
+                    app:layout_constraintTop_toBottomOf="@+id/headinEventsProfile">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/bg_crane_red"
+                        android:src="@drawable/ic_baseline_new_releases_24"
+                        android:scaleType="centerInside"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Events"
+                        android:layout_marginStart="10dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Application"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutSpecialEvents"
                     android:textColor="@color/grey_100"
                     android:id="@+id/headinApplicationProfile"
                     android:layout_marginTop="20dp"/>
@@ -366,6 +403,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     android:gravity="center_vertical"
                     android:id="@+id/layoutAd"
+                    android:visibility="gone"
                     app:layout_constraintTop_toBottomOf="@+id/layoutPrivacy">
 
                     <ImageView
@@ -383,6 +421,68 @@
                         android:textColor="@color/white"/>
 
                 </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="About"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutPrivacy"
+                    android:textColor="@color/grey_100"
+                    android:id="@+id/headinAboutProfile"
+                    android:layout_marginTop="20dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:gravity="center_vertical"
+                    android:id="@+id/layoutAboutDSC"
+                    app:layout_constraintTop_toBottomOf="@+id/headinAboutProfile">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/bg_deep_purple"
+                        android:src="@drawable/info_white"
+                        android:scaleType="centerInside"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="About DSC CU"
+                        android:layout_marginStart="10dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:gravity="center_vertical"
+                    android:id="@+id/layoutVersion"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutAboutDSC">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/bg_deep_purple"
+                        android:src="@drawable/version_white"
+                        android:scaleType="centerInside"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Version: 1.0.1"
+                        android:layout_marginStart="10dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"/>
+
+                </LinearLayout>
+
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

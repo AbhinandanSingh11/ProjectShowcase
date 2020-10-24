@@ -89,7 +89,7 @@ public class projectDesc extends AppCompatActivity {
             @Override
             public void onRewardedAdFailedToLoad(int i) {
                 super.onRewardedAdFailedToLoad(i);
-                Toast.makeText(projectDesc.this, "Ad loading failed "+i, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(projectDesc.this, "Ad loading failed "+i, Toast.LENGTH_SHORT).show();
             }
         };
 
@@ -161,8 +161,8 @@ public class projectDesc extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(projectDesc.this,MainActivity.class);
-                startActivity(intent);
+                projectDesc.super.onBackPressed();
+                finish();
             }
         });
 

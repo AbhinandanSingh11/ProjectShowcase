@@ -52,6 +52,12 @@ public class LoginActivity extends AppCompatActivity {
     private SignInButton signInButton;
 
     @Override
+    public void onBackPressed() {
+        finish();
+        finishAffinity();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -60,6 +66,8 @@ public class LoginActivity extends AppCompatActivity {
 
         signInButton = findViewById(R.id.signInWithGoogle);
         progressBar = findViewById(R.id.progress);
+
+        signInButton.setSize(SignInButton.SIZE_WIDE);
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,7 +159,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         // [START_EXCLUDE]
                         //hideProgressBar();
-                        progressBar.setVisibility(View.GONE);
+                        //progressBar.setVisibility(View.GONE);
                         // [END_EXCLUDE]
                     }
                 });
@@ -181,9 +189,12 @@ public class LoginActivity extends AppCompatActivity {
                     if(task.isSuccessful()){
                         Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                         startActivity(intent);
+                        progressBar.setVisibility(View.GONE);
                     }
                     else{
+                        Log.d("Tagjhjdhajdhahd",task.getResult().toString());
                         Toast.makeText(LoginActivity.this, "Something went wrong, try again!", Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.GONE);
                     }
                 }
             });

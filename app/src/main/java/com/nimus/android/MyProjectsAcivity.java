@@ -82,8 +82,7 @@ public class MyProjectsAcivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MyProjectsAcivity.this,ActivityProfile.class);
-                startActivity(intent);
+                MyProjectsAcivity.super.onBackPressed();
             }
         });
     }

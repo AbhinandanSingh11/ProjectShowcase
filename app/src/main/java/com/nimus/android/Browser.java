@@ -41,9 +41,7 @@ public class Browser extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Browser.this,ActivityProfile.class);
-                startActivity(intent);
-                finish();
+                Browser.super.onBackPressed();
             }
         });
 
@@ -52,7 +50,7 @@ public class Browser extends AppCompatActivity {
         webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
-        Toast.makeText(this, "URl = "+URL, Toast.LENGTH_SHORT).show();
+        
         webView.loadUrl(URL);
     }
 
